@@ -6,6 +6,81 @@
 
 @theme inline {
   /* =========================
+TYPOGRAPHY
+========================= */
+
+  --text-display-3xl: 3.75rem;
+  --text-display-2xl: 3rem;
+  --text-display-xl: 2.5rem;
+  --text-display-lg: 2.25rem;
+  --text-display-md: 2rem;
+  --text-display-sm: 1.75rem;
+  --text-display-xs: 1.5rem;
+
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-md: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+
+  /* =========================
+  LINE HEIGHT
+  ========================= */
+
+  --leading-display-3xl: 4.5rem;
+  --leading-display-2xl: 3.75rem;
+  --leading-display-xl: 3rem;
+  --leading-display-lg: 2.75rem;
+  --leading-display-md: 2.5rem;
+  --leading-display-sm: 2.375rem;
+  --leading-display-xs: 2.25rem;
+
+  --leading-xl: 2.125rem;
+  --leading-lg: 2rem;
+  --leading-md: 1.875rem;
+  --leading-sm: 1.75rem;
+  --leading-xs: 1.5rem;
+
+  /* =========================
+  LETTER SPACING
+  ========================= */
+
+  --tracking-display-2xl: -0.02em;
+  --tracking-display-xl: -0.02em;
+  --tracking-display-lg: -0.02em;
+
+  /* =========================
+FONT WEIGHT
+========================= */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* =========================
+SPACING
+========================= */
+
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 6px;
+  --spacing-md: 8px;
+  --spacing-lg: 12px;
+  --spacing-xl: 16px;
+  --spacing-2xl: 20px;
+  --spacing-3xl: 24px;
+  --spacing-4xl: 32px;
+  --spacing-5xl: 40px;
+  --spacing-6xl: 48px;
+  --spacing-7xl: 64px;
+  --spacing-8xl: 80px;
+  --spacing-9xl: 96px;
+  --spacing-10xl: 128px;
+  --spacing-11xl: 140px;
+
+  /* =========================
 CORE TOKENS
 ========================= */
 
@@ -63,6 +138,9 @@ SIDEBAR
 RADIUS
 ========================= */
 
+  --radius-none: 0;
+  --radius-xxs: 2px;
+  --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
@@ -70,6 +148,7 @@ RADIUS
   --radius-2xl: 16px;
   --radius-3xl: 20px;
   --radius-4xl: 24px;
+  --radius-full: 9999px;
 }
 
 :root {
@@ -195,7 +274,7 @@ SIDEBAR
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
 
     min-height: 100vh;
     text-rendering: optimizeLegibility;
@@ -212,29 +291,28 @@ SIDEBAR
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
+}
+@layer utilities {
+  .app-container {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
 
-  @layer utilities {
+  .section-spacing {
+    padding-block: 4rem;
+  }
+
+  @media (min-width: 768px) {
     .app-container {
-      width: 100%;
-      max-width: 1440px;
-      margin-inline: auto;
-      padding-inline: 1rem;
+      padding-inline: 2rem;
     }
+  }
 
-    .section-spacing {
-      padding-block: 4rem;
-    }
-
-    @media (min-width: 768px) {
-      .app-container {
-        padding-inline: 2rem;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .app-container {
-        padding-inline: 5rem;
-      }
+  @media (min-width: 1280px) {
+    .app-container {
+      padding-inline: 5rem;
     }
   }
 }

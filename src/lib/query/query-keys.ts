@@ -1,11 +1,22 @@
 export const queryKeys = {
   auth: {
-    profile: ['profile'],
+    profile: ['auth', 'profile'],
   },
 
   restaurant: {
     all: ['restaurants'],
-    detail: (id: string) => ['restaurant', id],
+
+    list: (params?: unknown) => ['restaurants', 'list', params],
+
+    detail: (id: string) => ['restaurants', 'detail', id],
+
+    search: (query: string) => ['restaurants', 'search', query],
+
+    bestSeller: ['restaurants', 'best-seller'],
+
+    recommended: ['restaurants', 'recommended'],
+
+    nearby: ['restaurants', 'nearby'],
   },
 
   cart: {
