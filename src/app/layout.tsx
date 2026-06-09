@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Nunito_Sans } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/query/utils/utils';
 
-const nunitoSans = Nunito_Sans({ subsets: ['latin'], variable: '--font-sans' });
+const nunito = Nunito({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      className={cn('h-full', 'antialiased', 'font-sans', nunitoSans.variable)}
+      className={cn('h-full', 'antialiased', 'font-sans', nunito.variable)}
     >
       <body className='min-h-full flex flex-col'>{children}</body>
     </html>
