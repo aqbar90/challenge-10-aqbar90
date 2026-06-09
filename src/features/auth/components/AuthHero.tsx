@@ -4,13 +4,13 @@ import authHero from '@/assets/images/auth/auth-hero.jpg';
 
 export function AuthHero() {
   return (
-    <div className='relative h-full w-full overflow-hidden'>
+    <div className='relative h-full overflow-hidden '>
       <Image
         src={authHero}
         alt='Delicious burger and fries'
         fill
         priority
-        className='object-cover'
+        className='h-full w-auto object-fill '
       />
     </div>
   );

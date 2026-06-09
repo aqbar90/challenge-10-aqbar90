@@ -4,10 +4,10 @@ import logo from '@/assets/icons/logo.svg';
 
 export function AuthLogo() {
   return (
-    <div className='flex items-center gap-md'>
-      <Image src={logo} alt='Foody Logo' width={24} height={24} priority />
+    <div className='flex items-center gap-3.75'>
+      <Image src={logo} alt='Foody Logo' width={42} height={42} priority />
 
-      <span className='text-md-custom font-bold-custom text-foreground'>
+      <span className='text-display-md leading-display-md font-extrabold font-sans text-foreground'>
         Foody
       </span>
     </div>
