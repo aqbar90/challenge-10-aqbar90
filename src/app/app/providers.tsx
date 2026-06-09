@@ -2,8 +2,8 @@
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
-
 import { queryClient } from '@/lib/query/query-client';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 type ProvidersProps = {
   children: ReactNode;
@@ -11,6 +11,10 @@ type ProvidersProps = {
 
 export default function Providers({ children }: ProvidersProps) {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      {children}
+
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }

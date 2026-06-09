@@ -6,3 +6,21 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+/*
+ * Request interceptor
+ * Auth token akan ditambahkan pada tahap Login.
+ */
+api.interceptors.request.use((config) => {
+  return config;
+});
+
+/*
+ * Response interceptor
+ * Global error handling akan ditambahkan
+ * setelah auth flow selesai dibuat.
+ */
+api.interceptors.response.use(
+  (response) => response,
+  (error) => Promise.reject(error)
+);
