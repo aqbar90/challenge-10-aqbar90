@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { Eye, EyeOff } from 'lucide-react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,11 @@ import { useLogin } from '../hooks/useLogin';
 import { loginSchema, type LoginSchema } from '../schemas/login-schema';
 
 import { AuthTabs } from './AuthTabs';
+import { PasswordRequirements } from './PasswordRequirements';
+
+import { useRouter } from 'next/navigation';
+
+import { useAuthStore } from '@/stores/auth-store';
 
 export function LoginForm() {
   const {
@@ -35,19 +40,28 @@ export function LoginForm() {
   const loginMutation = useLogin();
 
   const onSubmit = async (values: LoginSchema) => {
-    try {
-      const response = await loginMutation.mutateAsync({
-        email: values.email,
-        password: values.password,
-      });
+    const response = await loginMutation.mutateAsync({
+      email: values.email,
+      password: values.password,
+    });
 
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+    const { token, user } = response.data;
+
+    setAuth(token, user);
+
+    router.push('/');
   };
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const passwordValue = useWatch({
+    control,
+    name: 'password',
+  });
+
+  const router = useRouter();
+
+  const setAuth = useAuthStore((state) => state.setAuth);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
@@ -90,6 +104,8 @@ export function LoginForm() {
               {errors.password.message}
             </p>
           )}
+
+          {passwordValue && <PasswordRequirements password={passwordValue} />}
         </div>
       </div>
 
@@ -98,7 +114,11 @@ export function LoginForm() {
           control={control}
           name='rememberMe'
           render={({ field }) => (
-            <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+            <Checkbox
+              id='remember-me'
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
           )}
         />
 
@@ -120,7 +140,6 @@ export function LoginForm() {
         className='w-full'
         disabled={loginMutation.isPending}
       >
-        Login
         {loginMutation.isPending ? 'Logging in...' : 'Login'}
       </Button>
     </form>
