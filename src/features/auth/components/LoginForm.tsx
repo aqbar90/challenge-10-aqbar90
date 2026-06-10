@@ -10,12 +10,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 
-import { useLogin } from '../hooks/useLogin';
+import { useLogin } from '@/features/auth/hooks/useLogin';
 
-import { loginSchema, type LoginSchema } from '../schemas/login-schema';
+import {
+  loginSchema,
+  type LoginSchema,
+} from '@/features/auth/schemas/login-schema';
 
-import { AuthTabs } from './AuthTabs';
-import { PasswordRequirements } from './PasswordRequirements';
+import { AuthTabs } from '@/features/auth/components/shared/AuthTabs';
+import { PasswordRequirements } from '@/features/auth/components/shared/PasswordRequirements';
 
 import { useRouter } from 'next/navigation';
 
@@ -37,7 +40,18 @@ export function LoginForm() {
     },
   });
 
+  const router = useRouter();
+
+  const setAuth = useAuthStore((state) => state.setAuth);
+
   const loginMutation = useLogin();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const passwordValue = useWatch({
+    control,
+    name: 'password',
+  });
 
   const onSubmit = async (values: LoginSchema) => {
     const response = await loginMutation.mutateAsync({
@@ -51,17 +65,6 @@ export function LoginForm() {
 
     router.push('/');
   };
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const passwordValue = useWatch({
-    control,
-    name: 'password',
-  });
-
-  const router = useRouter();
-
-  const setAuth = useAuthStore((state) => state.setAuth);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
