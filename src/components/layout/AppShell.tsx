@@ -1,4 +1,4 @@
-import { Navbar } from './Navbar';
+// import { Navbar } from './Navbar';
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ type AppShellProps = {
 export function AppShell({ children }: AppShellProps) {
   return (
     <div className='min-h-screen bg-background'>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <main>{children}</main>
     </div>

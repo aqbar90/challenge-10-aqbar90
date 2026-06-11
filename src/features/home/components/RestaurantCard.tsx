@@ -8,19 +8,84 @@ type RestaurantCardProps = {
 
 export function RestaurantCard({ restaurant }: RestaurantCardProps) {
   return (
-    <div className='rounded-xl border p-4'>
-      <Image
+    <div
+      className='
+        flex
+        items-center
+        gap-4
+        rounded-2xl
+        border
+        border-border
+        bg-background
+        p-5
+        shadow-sm
+      '
+    >
+      <img
         src={restaurant.logo}
         alt={restaurant.name}
-        width={120}
-        height={120}
+        className='
+          h-[120px]
+          w-[120px]
+          shrink-0
+          rounded-xl
+          object-cover
+        '
       />
 
-      <h3>{restaurant.name}</h3>
+      <div
+        className='
+          flex
+          flex-col
+          gap-2
+        '
+      >
+        <h3
+          className='
+            text-lg
+            font-extrabold
+            leading-lg
+            tracking-tight
+            text-foreground
+          '
+        >
+          {restaurant.name}
+        </h3>
 
-      <p>⭐ {restaurant.star}</p>
+        <div
+          className='
+            flex
+            items-center
+            gap-2
+          '
+        >
+          <span>⭐</span>
 
-      <p>{restaurant.place}</p>
+          <span
+            className='
+              text-md
+              font-medium
+              leading-md
+              tracking-tight
+              text-foreground
+            '
+          >
+            {restaurant.star}
+          </span>
+        </div>
+
+        <p
+          className='
+            text-md
+            font-normal
+            leading-md
+            tracking-tight
+            text-muted-foreground
+          '
+        >
+          {restaurant.place}
+        </p>
+      </div>
     </div>
   );
 }

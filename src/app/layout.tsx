@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
+
 import './globals.css';
-import Providers from '../providers/Providers';
+
+import Providers from '@/providers/Providers';
+import { AuthHydrator } from '@/components/providers/AuthHydrator';
+
 export const metadata: Metadata = {
   title: 'Restaurant App',
   description: 'Restaurant Ordering Application',
@@ -14,7 +18,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <AuthHydrator />
+          {children}
+        </Providers>
       </body>
     </html>
   );
