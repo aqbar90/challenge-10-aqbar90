@@ -28,3 +28,27 @@ export type LoginResponse = {
     token: string;
   };
 };
+
+export type RegisterRequest = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+};
+
+export type RegisterFormValues = {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
+};
+
+export type RegisterResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    user: User;
+    token: string;
+  };
+};
