@@ -45,18 +45,24 @@ export function RegisterForm() {
   });
 
   const onSubmit = async (values: RegisterSchema) => {
-    const response = await registerMutation.mutateAsync({
-      name: values.name,
-      email: values.email,
-      phone: values.phone,
-      password: values.password,
-    });
+    try {
+      const response = await registerMutation.mutateAsync({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        password: values.password,
+      });
 
-    const { token, user } = response.data;
+      console.log('REGISTER SUCCESS', response);
 
-    setAuth(token, user);
+      const { token, user } = response.data;
 
-    router.push('/');
+      setAuth(token, user);
+
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('REGISTER ERROR', error);
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -151,15 +157,9 @@ export function RegisterForm() {
       </div>
 
       {registerMutation.isError && (
-        <p
-          className='
-      text-sm
-      font-semibold
-      text-destructive
-    '
-        >
-          Registration failed.
-        </p>
+        <pre className='text-xs text-destructive'>
+          {JSON.stringify(registerMutation.error, null, 2)}
+        </pre>
       )}
 
       <Button

@@ -9,6 +9,7 @@ type AuthState = {
   user: User | null;
 
   isAuthenticated: boolean;
+  isHydrated: boolean;
 
   setAuth: (token: string, user: User) => void;
 
@@ -23,6 +24,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
 
   isAuthenticated: false,
+  isHydrated: false,
 
   setAuth: (token, user) => {
     authStorage.setToken(token);
@@ -32,6 +34,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       token,
       user,
       isAuthenticated: true,
+      isHydrated: true,
     });
   },
 
@@ -42,6 +45,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       token: null,
       user: null,
       isAuthenticated: false,
+      isHydrated: true,
     });
   },
 
@@ -50,14 +54,19 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     const user = authStorage.getUser();
 
-    if (!token || !user) {
+    if (token && user) {
+      set({
+        token,
+        user,
+        isAuthenticated: true,
+        isHydrated: true,
+      });
+
       return;
     }
 
     set({
-      token,
-      user,
-      isAuthenticated: true,
+      isHydrated: true,
     });
   },
 }));

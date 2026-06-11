@@ -4,7 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 import { queryClient } from '@/lib/query/query-client';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { AuthProvider } from '@/components/providers/AuthProvider';
+import { AuthHydrator } from '@/components/providers/AuthHydrator';
 
 type ProvidersProps = {
   children: ReactNode;
@@ -13,7 +13,9 @@ type ProvidersProps = {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthHydrator />
+
+      {children}
 
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

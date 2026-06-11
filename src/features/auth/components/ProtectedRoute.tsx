@@ -15,11 +15,17 @@ export function ProtectedRoute({ children }: Props) {
 
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+  const isHydrated = useAuthStore((state) => state.isHydrated);
+
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isHydrated && !isAuthenticated) {
       router.replace('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isHydrated, isAuthenticated, router]);
+
+  if (!isHydrated) {
+    return null;
+  }
 
   if (!isAuthenticated) {
     return null;
