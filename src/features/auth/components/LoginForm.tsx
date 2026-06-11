@@ -63,7 +63,7 @@ export function LoginForm() {
 
     setAuth(token, user);
 
-    router.push('/');
+    router.push('/dashboard');
   };
 
   return (
