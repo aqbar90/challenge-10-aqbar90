@@ -1,0 +1,94 @@
+import Image from 'next/image';
+import { Star } from 'lucide-react';
+
+import type { Restaurant } from '../types/restaurant.types';
+
+type Props = {
+  restaurant: Restaurant;
+};
+
+export function RestaurantCard({ restaurant }: Props) {
+  return (
+    <article
+      className='
+        flex
+        items-center
+        gap-3
+        rounded-2xl
+        bg-white
+        p-4
+        shadow-card
+        transition-all
+        hover:-translate-y-1
+      '
+    >
+      <Image
+        src={restaurant.logo}
+        alt={restaurant.name}
+        width={120}
+        height={120}
+        className='
+          h-24
+          w-24
+          rounded-xl
+          object-cover
+          md:h-30
+          md:w-30
+        '
+      />
+
+      <div className='flex flex-1 flex-col gap-1'>
+        <h3
+          className='
+            line-clamp-1
+            text-sm
+            font-extrabold
+            md:text-lg
+          '
+        >
+          {restaurant.name}
+        </h3>
+
+        <div className='flex items-center gap-1'>
+          <Star
+            className='
+              size-4
+              fill-yellow-400
+              text-yellow-400
+            '
+          />
+
+          <span
+            className='
+              text-sm
+              font-medium
+              md:text-base
+            '
+          >
+            {restaurant.star}
+          </span>
+        </div>
+
+        <div
+          className='
+            flex
+            items-center
+            gap-2
+            text-xs
+            text-muted-foreground
+            md:text-base
+          '
+        >
+          <span>{restaurant.place}</span>
+
+          {restaurant.distance && (
+            <>
+              <span>•</span>
+              <span>{restaurant.distance} km</span>
+            </>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}

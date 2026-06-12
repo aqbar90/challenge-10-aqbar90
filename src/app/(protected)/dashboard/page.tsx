@@ -1,14 +1,19 @@
 'use client';
 
 import { useRestaurants } from '@/features/restaurant/hooks/useRestaurants';
-
-import { RestaurantCard } from '@/features/home/components/RestaurantCard';
+import { useCategoryStore } from '@/features/restaurant/stores/category-store';
 
 import { HeroSection } from '@/features/restaurant/components/hero/HeroSection';
 import { HomeNavbar } from '@/features/home/components/navbar/HomeNavbar';
+import { CategorySection } from '@/features/home/components/category/CategorySection';
+import { PageContainer } from '@/components/layout/PageContainer';
+import { RestaurantSection } from '@/features/restaurant/components/RestaurantSection';
+import { RecommendedSection } from '@/features/home/components/RecommendedSection';
 
 export default function DashboardPage() {
-  const { data, isLoading } = useRestaurants();
+  const selectedCategory = useCategoryStore((state) => state.selectedCategory);
+
+  const { data, isLoading } = useRestaurants(selectedCategory);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -17,23 +22,18 @@ export default function DashboardPage() {
   return (
     <div>
       <HomeNavbar />
+
       <HeroSection />
 
-      <div className='mx-auto max-w-300 p-6'>
-        <div
-          className='
-    grid
-    gap-5
-    p-6
-    md:grid-cols-2
-    xl:grid-cols-3
-  '
-        >
-          {data?.data.restaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-          ))}
-        </div>
-      </div>
+      <PageContainer>
+        <CategorySection />
+      </PageContainer>
+
+      <PageContainer>
+        {!selectedCategory && <RecommendedSection />}
+      </PageContainer>
+
+      <PageContainer>{selectedCategory && <RestaurantSection />}</PageContainer>
     </div>
   );
 }
