@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { LogOut, User, Heart, Receipt } from 'lucide-react';
+import { MapPin, ClipboardList, LogOut } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -37,7 +37,7 @@ export function UserDropdown({ children }: UserDropdownProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
 
-      <DropdownMenuContent align='end' className='w-60'>
+      <DropdownMenuContent align='end' className='w-60 rounded-2xl p-0'>
         <DropdownMenuSeparator />
 
         <div className='flex items-center gap-3 p-3'>
@@ -49,33 +49,27 @@ export function UserDropdown({ children }: UserDropdownProps) {
             className='rounded-full object-cover'
           />
 
-          <div className='min-w-0'>
-            <p className='truncate text-sm font-semibold'>{user?.name}</p>
-
-            <p className='truncate text-xs text-muted-foreground'>
-              {user?.email}
-            </p>
-          </div>
+          <span className='truncate text-sm font-semibold'>{user?.name}</span>
         </div>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User className='h-4 w-4 cursor-pointer' />
-          My Profile
+
+        <DropdownMenuItem className='py-3'>
+          <MapPin className='size-4' />
+          Delivery Address
         </DropdownMenuItem>
 
-        <DropdownMenuItem>
-          <Receipt className='h-4 w-4 cursor-pointer' />
+        <DropdownMenuItem className='py-3'>
+          <ClipboardList className='size-4' />
           My Orders
         </DropdownMenuItem>
 
-        <DropdownMenuItem>
-          <Heart className='h-4 w-4 cursor-pointer' />
-          Favorites
-        </DropdownMenuItem>
-
-        <DropdownMenuItem variant='destructive' onClick={handleLogout}>
-          <LogOut className='h-4 w-4 cursor-pointer' />
+        <DropdownMenuItem
+          className='py-3'
+          variant='destructive'
+          onClick={handleLogout}
+        >
+          <LogOut className='size-4' />
           Logout
         </DropdownMenuItem>
       </DropdownMenuContent>

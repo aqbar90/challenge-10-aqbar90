@@ -20,6 +20,8 @@ export function HomeLogo({ isScrolled }: HomeLogoProps) {
 
       <span
         className={`
+          hidden
+          md:block
           text-display-md
           font-extrabold
           leading-display-md

@@ -42,10 +42,12 @@ export function HomeNavbar() {
         className='
           mx-auto
           flex
-          h-20
+          h-16
+          md:h-20
           items-center
           justify-between
-          px-30
+          px-4
+          md:px-30
         '
       >
         <HomeLogo isScrolled={isScrolled} />

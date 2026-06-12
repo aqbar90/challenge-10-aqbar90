@@ -60,6 +60,8 @@ export function NavbarUser({ isScrolled }: NavbarUserProps) {
 
           <span
             className={`
+            hidden
+            md:block
             text-sm
             font-semibold
             transition-colors

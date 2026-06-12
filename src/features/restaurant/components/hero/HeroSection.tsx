@@ -6,7 +6,7 @@ import { Search } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section className='relative h-206.75 w-full overflow-hidden'>
+    <section className='relative h-175 md:h-206.75 w-full overflow-hidden'>
       <Image
         src={heroImage}
         alt='Restaurant Hero'
@@ -25,7 +25,8 @@ export function HeroSection() {
           flex-col
           items-center
           justify-center
-          gap-10
+          gap-6
+          md:gap-10
           px-6
           text-center
         '
@@ -33,9 +34,11 @@ export function HeroSection() {
         <div className='space-y-2'>
           <h1
             className='
-              text-display-2xl
+              text-display-lg
+              leading-display-lg
+              md:text-display-2xl
               font-extrabold
-              leading-display-2xl
+              md:leading-display-2xl
               text-white
             '
           >
@@ -44,8 +47,13 @@ export function HeroSection() {
 
           <p
             className='
-              text-display-xs
-              leading-display-xs
+              mx-auto
+              max-w-87.25
+              lg:max-w-none
+              text-lg
+              leading-lg
+              md:text-display-xs
+              md:leading-display-xs
               font-bold
               text-white
             '
@@ -57,13 +65,16 @@ export function HeroSection() {
         <div
           className='
             flex
-            h-14
+            h-12
+            md:h-14
             w-full
-            max-w-151
+            max-w-87.25
+            md:max-w-151
             items-center
             rounded-full
             bg-white
-            px-6
+            px-4
+            md:px-6
           '
         >
           <Search className='mr-2 size-5 text-muted-foreground' />
@@ -72,6 +83,10 @@ export function HeroSection() {
             type='text'
             placeholder='Search restaurants, food and drink'
             className='
+              text-sm
+              leading-sm
+              md:text-md
+              md:leading-md
               w-full
               bg-transparent
               outline-none
