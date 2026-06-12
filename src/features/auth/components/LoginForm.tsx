@@ -24,6 +24,8 @@ import { useRouter } from 'next/navigation';
 
 import { useAuthStore } from '@/stores/auth-store';
 
+import { rememberMeStorage } from '@/lib/auth/remember-me';
+
 export function LoginForm() {
   const {
     control,
@@ -34,9 +36,9 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
 
     defaultValues: {
-      email: '',
+      email: rememberMeStorage.getEmail(),
       password: '',
-      rememberMe: false,
+      rememberMe: !!rememberMeStorage.getEmail(),
     },
   });
 
@@ -60,6 +62,12 @@ export function LoginForm() {
     });
 
     const { token, user } = response.data;
+
+    if (values.rememberMe) {
+      rememberMeStorage.setEmail(values.email);
+    } else {
+      rememberMeStorage.clearEmail();
+    }
 
     setAuth(token, user);
 
