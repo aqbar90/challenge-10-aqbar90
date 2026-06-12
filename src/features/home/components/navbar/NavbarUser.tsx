@@ -49,7 +49,7 @@ export function NavbarUser({ isScrolled }: NavbarUserProps) {
         )}
       </div>
       <UserDropdown>
-        <button className='flex items-center gap-4 cursor-pointer'>
+        <button className='flex items-center gap-4 cursor-pointer rounded-full transition-colors hover:bg-black/5 px-3 py-1'>
           <Image
             src={user?.avatar || defaultAvatar}
             alt={user?.name ?? 'User'}
