@@ -1,37 +1,76 @@
 import Image from 'next/image';
 
-import cartIcon from '@/assets/images/navbar/cart-white.svg';
+import cartWhite from '@/assets/images/navbar/cart-white.svg';
+import cartBlack from '@/assets/images/navbar/cart-dark.svg';
 import defaultAvatar from '@/assets/images/navbar/profile.png';
 
 import { useAuthStore } from '@/stores/auth-store';
+import { UserDropdown } from './UserDropDown';
 
-export function NavbarUser() {
+type NavbarUserProps = {
+  isScrolled: boolean;
+};
+
+export function NavbarUser({ isScrolled }: NavbarUserProps) {
   const user = useAuthStore((state) => state.user);
   console.log('USER STORE', user);
 
+  const cartCount = 2;
+
   return (
-    <div className='flex items-center gap-6'>
-      <Image src={cartIcon} alt='Cart' width={24} height={24} />
-
-      <div className='flex items-center gap-4'>
+    <div className=' flex items-center gap-6'>
+      <div className='relative'>
         <Image
-          src={user?.avatar || defaultAvatar}
-          alt={user?.name ?? 'User'}
-          width={40}
-          height={40}
-          className='rounded-full object-cover'
+          src={isScrolled ? cartBlack : cartWhite}
+          alt='Cart'
+          width={24}
+          height={24}
         />
+        {cartCount > 0 && (
+          <span
+            className='
+          absolute
+          -right-2
+          -top-2
+          flex
+          h-5
+          w-5
+          items-center
+          justify-center
+          rounded-full
+          bg-red-500
+          text-[10px]
+          font-bold
+          text-white
+        '
+          >
+            {cartCount}
+          </span>
+        )}
+      </div>
+      <UserDropdown>
+        <button className='flex items-center gap-4 cursor-pointer'>
+          <Image
+            src={user?.avatar || defaultAvatar}
+            alt={user?.name ?? 'User'}
+            width={40}
+            height={40}
+            className='rounded-full object-cover'
+          />
 
-        <span
-          className='
+          <span
+            className={`
             text-sm
             font-semibold
-            text-white
-          '
-        >
-          {user?.name}
-        </span>
-      </div>
+            transition-colors
+            duration-300
+            ${isScrolled ? 'text-black' : 'text-white'}
+          `}
+          >
+            {user?.name}
+          </span>
+        </button>
+      </UserDropdown>
     </div>
   );
 }
