@@ -29,3 +29,33 @@ export type RestaurantListResponse = {
     };
   };
 };
+
+export type RecommendedRestaurant = {
+  id: number;
+  name: string;
+  star: number;
+  place: string;
+  logo: string;
+  images: string[];
+  category: string;
+  reviewCount: number;
+  sampleMenus: {
+    id: number;
+    foodName: string;
+    price: number;
+    type: string;
+    image: string;
+  }[];
+
+  isFrequentlyOrdered: boolean;
+
+  distance: number;
+};
+
+export type RecommendedRestaurantResponse = {
+  success: boolean;
+
+  data: {
+    recommendations: RecommendedRestaurant[];
+  };
+};
